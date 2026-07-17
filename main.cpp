@@ -181,7 +181,7 @@ void servicePiano() {
     prob = noteFreq1.probability();
   }
 
-  // ---- Tunables (use your existing values) ----
+  // ---- Tunables ----
   const float ON_PEAK     = 0.010f;
   const float QUIET_PEAK  = 0.005f;
 
@@ -490,7 +490,7 @@ void setup() {
   synthLPF.setLowpass(0, 800.0f, 0.707f); // pre-filter helps tracking
 
   // Piano instrument
-  piano1.setInstrument(KorgTriton);       // from your decoded header
+  piano1.setInstrument(KorgTriton);       // from SoundFont-decoded header file
   // (Amplitude comes from playNote(note, velocity) 0..127)
 
   // Default output: normal presets audible, piano muted
@@ -501,7 +501,7 @@ void setup() {
   const int voices = 3;
   bool ok = chorus1.begin(chorus_delayline, CHORUS_DELAY_LENGTH, voices);
   if (!ok) {
-    // If begin fails, you likely need a larger delay buffer length.
+    // If begin fails, likely need a larger delay buffer length.
     while (1) { }
   }
   chorus1.voices(0); // off until preset3
@@ -521,18 +521,6 @@ void setup() {
 }
 
 volatile int lastPresetIndex = -1; // NOTE: not sure if volatile is necessary here
-
-// debounce function for encoder switch
-// void SWDebounce(){
-//   unsigned long currTime = millis();
-  
-//   if (currTime - lastTime > debounceDelay){
-//     lastTime = currTime;
-//   }
-//   else{
-//     SWDebounce();
-//   }
-// }
 
 void loop() {
 
